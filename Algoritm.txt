@@ -1,0 +1,38 @@
+[Отпечаток ключа вставляем в HTPv1.docx]
+           |
+           v
+[Оригинальный файл HTPv1.docx]     ← не трогаем
+           |
+           | 1️⃣        Считаем SHA-256
+           v
+   Document Hash (SHA-256)
+           |
+           | 2️⃣         Загружаем в IPFS
+           v
+       IPFS CID
+           |
+           | 3️⃣         Фиксируем в Blockchain / OpenTimestamps
+           v
+   Blockchain Anchor (tx / block)
+           |
+           | 4️⃣         Создаём HTPv1_fixed.txt
+           v
+ ┌───────────────────────────────┐
+ │ Public Key Fingerprint                                   │
+ │ Document Hash (SHA-256)                         │
+ │ IPFS CID                                                            │
+ │ Blockchain Anchor (tx/block)                     │
+ └───────────────────────────────┘
+           |
+           | 5️⃣          Подписываем PGP в Kleopatra
+           v
+HTPv1_fixed.txt.sig  ← Cryptographic Signature
+
+
+
+
+| Файл                           | Назначение                                                                                                  | Меняется?                                                       |
+| ------------------------ | --------------------------------------------------------------------------------- | -------------------------------------------------- |
+| HTPv1.docx                   | Оригинал, хэш считается, IPFS, блокчейн                                        | ❌ Нет                                                               |
+| HTPv1_fixed.docx        | Копия для публикации/подписи, содержит SHA, CID, Anchor | ✅ Да (добавлены строки)                         |
+| HTPv1_fixed.docx.sig | PGP подпись                                                                                                | ✅ Создаётся автоматически Kleopatra |
